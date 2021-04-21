@@ -7,7 +7,7 @@ namespace KAMI.Games
     {
         const uint m_address = 0x12B67F50;
 
-        public Resistance2(IntPtr ipc) : base(ipc)
+        public ArmoredCore4(IntPtr ipc) : base(ipc)
         {
         }
 
