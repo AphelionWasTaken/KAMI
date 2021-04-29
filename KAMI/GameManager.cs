@@ -12,7 +12,6 @@ namespace KAMI
             switch (id)
             {
                 case "NPUB31136": return new Xillia1(ipc);
-                case "BLUS30027": return new ArmoredCore4(ipc);
                 case "BLUS31604":
                 case "BLES02247":
                 case "NPUB31848":
