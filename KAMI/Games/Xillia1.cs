@@ -6,7 +6,6 @@ namespace KAMI.Games
 {
     class Xillia1 : Game<HAVACamera>
     {
-
         const uint BaseAddress = 0xE1552C;
 
         DerefChain m_hor;
@@ -23,14 +22,13 @@ namespace KAMI.Games
         {
             if (DerefChain.VerifyChains(m_hor, m_vert))
             {
-            m_camera.Hor = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_hor.Value));
-            m_camera.Vert = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_vert.Value));
+                m_camera.Hor = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_hor.Value));
+                m_camera.Vert = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_vert.Value));
             
-            m_camera.Update(diffX * SensModifier, diffY * SensModifier);
+                m_camera.Update(diffX * SensModifier, diffY * SensModifier);
 
-            IPCUtils.WriteFloat(m_ipc, (uint)m_hor.Value, m_camera.Hor);
-            IPCUtils.WriteFloat(m_ipc, (uint)m_vert.Value, m_camera.Vert);
-            
+                IPCUtils.WriteFloat(m_ipc, (uint)m_hor.Value, m_camera.Hor);
+                IPCUtils.WriteFloat(m_ipc, (uint)m_vert.Value, m_camera.Vert);           
             }
         }
     }
