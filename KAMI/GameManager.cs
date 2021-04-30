@@ -11,6 +11,7 @@ namespace KAMI
         {
             switch (id)
             {
+                case "BLUS31006":
                 case "NPUB31136": return new Xillia1(ipc);
                 case "BLUS31604":
                 case "BLES02247":
