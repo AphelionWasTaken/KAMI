@@ -8,27 +8,24 @@ namespace KAMI.Games
     {
         const uint BaseAddress = 0xE1552C;
 
-        DerefChain m_hor;
-        DerefChain m_vert;
+        DerefChain m_addr;
 
         public Xillia1(IntPtr ipc) : base(ipc)
         {
-            var baseChain = DerefChain.CreateDerefChain(ipc, BaseAddress);
-            m_hor = baseChain.Chain(0x78);
-            m_vert = baseChain.Chain(0x7C);
+            m_addr = DerefChain.CreateDerefChain(ipc, BaseAddress, 0x78);
         }
 
         public override void UpdateCamera(int diffX, int diffY)
         {
-            if (DerefChain.VerifyChains(m_hor, m_vert))
+            if (DerefChain.VerifyChains(m_addr))
             {
-                m_camera.Hor = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_hor.Value));
-                m_camera.Vert = (float)(IPCUtils.ReadFloat(m_ipc, (uint)m_vert.Value));
-            
+                m_camera.Hor = IPCUtils.ReadFloat(m_ipc, (uint)m_addr.Value);
+                m_camera.Vert = IPCUtils.ReadFloat(m_ipc, (uint)(m_addr.Value + 4));
+
                 m_camera.Update(diffX * SensModifier, diffY * SensModifier);
 
-                IPCUtils.WriteFloat(m_ipc, (uint)m_hor.Value, m_camera.Hor);
-                IPCUtils.WriteFloat(m_ipc, (uint)m_vert.Value, m_camera.Vert);           
+                IPCUtils.WriteFloat(m_ipc, (uint)m_addr.Value, m_camera.Hor);
+                IPCUtils.WriteFloat(m_ipc, (uint)(m_addr.Value + 4), m_camera.Vert);
             }
         }
     }
